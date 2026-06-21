@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+  color: #1c1a17;
+  background-color: #f6efe1;
+}
+
+/* The manuscript desk: warm rag paper with a soft vignette + fibre grain. */
+.desk {
+  background-color: #f1e8d6;
+  background-image:
+    radial-gradient(115% 80% at 50% -8%, rgba(184, 137, 58, 0.1), transparent 55%),
+    radial-gradient(90% 70% at 100% 110%, rgba(122, 34, 48, 0.05), transparent 55%),
+    radial-gradient(80% 60% at 0% 105%, rgba(56, 76, 116, 0.045), transparent 60%);
+}
+
+/* faint laid-paper fibre over everything */
+.grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");
+  mix-blend-mode: multiply;
+  opacity: 0.05;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+/* a fresh sheet of staff paper */
+.sheet {
+  background: linear-gradient(180deg, #fdf9ef, #fbf6ea);
+  border: 1px solid #e4d8be;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 18px 42px -26px rgba(28, 26, 23, 0.42);
+}
+
+/* raised manuscript card */
+.card {
+  background: linear-gradient(180deg, #fbf6ea, #f5ecd9);
+  border: 1px solid #e4d8be;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.6) inset,
+    0 14px 34px -22px rgba(28, 26, 23, 0.4);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* the engraved gold-leaf headline glow */
+.gilt {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.key-press:active {
+  transform: translateY(1px);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: #ddcba3;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #7a2230;
+  border: 2px solid #fbf6ea;
+  box-shadow: 0 2px 6px rgba(28, 26, 23, 0.3);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #7a2230;
+  border: 2px solid #fbf6ea;
+  box-shadow: 0 2px 6px rgba(28, 26, 23, 0.3);
+  cursor: pointer;
+}
+
+/* notehead "ink settling" pulse when a question appears */
+@keyframes inkSettle {
+  0% {
+    opacity: 0;
+    transform: translateY(-3px) scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.ink-settle {
+  animation: inkSettle 0.32s cubic-bezier(0.22, 0.7, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
